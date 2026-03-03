@@ -1,10 +1,12 @@
 ---
 import astroLogo from '../assets/astro.svg';
 import background from '../assets/background.svg';
+import { Image } from 'astro:assets';
 ---
 
 <div id="container">
 	<h1>Hola <mark>mundo</mark></h1>
+	<Image src="https://imgur.com/QkIa5tT" alt="Description of image" width={500} height={500} />
 	<img id="background" src={background.src} alt="" fetchpriority="high" />
 	<main>
 		<section id="hero">
