@@ -7,6 +7,6 @@ import netlify from '@astrojs/netlify';
 export default defineConfig({
   adapter: netlify(),
   image: {
-    domains: ["imgur.com"],
+    domains: ["i.imgur.com"],
   }
 });
