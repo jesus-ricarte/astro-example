@@ -1,23 +1,26 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import LocaleHubLinks from '../../components/LocaleHubLinks.astro';
-import { getLocaleHubStaticPaths, getLocaleEntryByPath } from '../../i18n/config';
+import Layout from "../../layouts/Layout.astro";
+import LocaleHubLinks from "../../components/LocaleHubLinks.astro";
+import {
+  getLocaleHubStaticPaths,
+  getLocaleEntryByPath,
+} from "../../i18n/config";
 
 export function getStaticPaths() {
-	return getLocaleHubStaticPaths();
+  return getLocaleHubStaticPaths();
 }
 
 const { locale } = Astro.params;
 const entry = locale ? getLocaleEntryByPath(locale) : undefined;
 
 if (!entry) {
-	return new Response(null, { status: 404 });
+  return new Response(null, { status: 404 });
 }
 ---
 
 <Layout lang={entry.lang} title={entry.label}>
-	<main>
-		<h1>{entry.label}</h1>
-		<LocaleHubLinks localePath={entry.path} />
-	</main>
+  <main>
+    <h1>{entry.label}</h1>
+    <LocaleHubLinks localePath={entry.path} />
+  </main>
 </Layout>
