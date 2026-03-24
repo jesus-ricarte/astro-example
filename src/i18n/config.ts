@@ -1,5 +1,3 @@
-export type LocalePath = "en-us" | "es-es" | "ca-es";
-
 export type LocaleCode = "en-US" | "es-ES" | "ca-ES";
 
 export type SemanticRouteId = "products";
@@ -8,7 +6,6 @@ type LocaleRoutes = Record<SemanticRouteId, { segment: string; label: string }>;
 
 export const LOCALES = [
   {
-    path: "en-us" as const,
     code: "en-US" as const,
     lang: "en",
     label: "United States (English)",
@@ -17,7 +14,6 @@ export const LOCALES = [
     } satisfies LocaleRoutes,
   },
   {
-    path: "es-es" as const,
     code: "es-ES" as const,
     lang: "es",
     label: "España (Español)",
@@ -26,7 +22,6 @@ export const LOCALES = [
     } satisfies LocaleRoutes,
   },
   {
-    path: "ca-es" as const,
     code: "ca-ES" as const,
     lang: "ca",
     label: "Espanya (Català)",
@@ -36,22 +31,22 @@ export const LOCALES = [
   },
 ] as const;
 
-export function getLocaleEntryByPath(path: string) {
-  return LOCALES.find((l) => l.path === path);
+export function getLocaleEntry(locale: string) {
+  return LOCALES.find((l) => l.code === locale);
 }
 
 export function getLocaleHubStaticPaths() {
-  return LOCALES.map((loc) => ({ params: { locale: loc.path } }));
+  return LOCALES.map((loc) => ({ params: { locale: loc.code } }));
 }
 
 export function getProductStaticPaths() {
   return LOCALES.map((loc) => ({
-    params: { locale: loc.path, slug: loc.routes.products.segment },
+    params: { locale: loc.code, slug: loc.routes.products.segment },
   }));
 }
 
 export function resolvePageRoute(
-  localePath: string,
+  locale: string,
   slug: string,
 ): {
   routeId: SemanticRouteId;
@@ -59,7 +54,7 @@ export function resolvePageRoute(
   lang: string;
   label: string;
 } | null {
-  const entry = getLocaleEntryByPath(localePath);
+  const entry = getLocaleEntry(locale);
   if (!entry) return null;
 
   for (const routeId of Object.keys(entry.routes) as SemanticRouteId[]) {

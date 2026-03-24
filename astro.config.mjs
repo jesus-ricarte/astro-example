@@ -11,13 +11,8 @@ export default defineConfig({
     domains: ["i.imgur.com"],
   },
   i18n: {
-    // Must match a locale `path` (not only a `codes` entry) when using custom paths.
     defaultLocale: "en-US",
-    locales: [
-      { path: "en-us", codes: ["en-US"] },
-      { path: "es-es", codes: ["es-ES"] },
-      { path: "ca-es", codes: ["ca-ES"] },
-    ],
+    locales: ["en-US", "es-ES", "ca-ES"],
     routing: {
       prefixDefaultLocale: true,
       redirectToDefaultLocale: false,
