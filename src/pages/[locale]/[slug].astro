@@ -1,0 +1,28 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ProductsContent from '../../components/ProductsContent.astro';
+import { getProductStaticPaths, resolvePageRoute } from '../../i18n/config';
+
+export function getStaticPaths() {
+	return getProductStaticPaths();
+}
+
+const { locale, slug } = Astro.params;
+const resolved = locale && slug ? resolvePageRoute(locale, slug) : null;
+
+if (!resolved) {
+	return new Response(null, { status: 404 });
+}
+
+const pageTitle = resolved.label;
+---
+
+<Layout lang={resolved.lang} title={pageTitle}>
+	<main>
+		<ProductsContent
+			localeCode={resolved.code}
+			routeId={resolved.routeId}
+			heading={pageTitle}
+		/>
+	</main>
+</Layout>

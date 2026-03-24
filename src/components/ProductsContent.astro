@@ -1,0 +1,19 @@
+---
+/**
+ * Replace with CMS/API fetch using `localeCode` and `routeId` when wiring external content.
+ */
+interface Props {
+	localeCode: string;
+	routeId: string;
+	heading: string;
+}
+
+const { localeCode, routeId, heading } = Astro.props;
+---
+
+<section>
+	<h1>{heading}</h1>
+	<p data-locale={localeCode} data-route={routeId}>
+		Content for this locale loads here (external source not connected yet).
+	</p>
+</section>

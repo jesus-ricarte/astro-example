@@ -1,0 +1,23 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { getLocaleEntryByPath, type LocalePath } from '../i18n/config';
+
+interface Props {
+	localePath: LocalePath;
+}
+
+const { localePath } = Astro.props;
+const entry = getLocaleEntryByPath(localePath);
+if (!entry) {
+	throw new Error(`Unknown locale path: ${localePath}`);
+}
+
+const { segment, label } = entry.routes.products;
+const productsHref = getRelativeLocaleUrl(entry.code, segment);
+---
+
+<nav aria-label="Site">
+	<ul>
+		<li><a href={productsHref}>{label}</a></li>
+	</ul>
+</nav>
