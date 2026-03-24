@@ -1,0 +1,27 @@
+---
+import { Picture } from "astro:assets";
+/**
+ * Replace with CMS/API fetch using `localeCode` and `routeId` when wiring external content.
+ */
+interface Props {
+  localeCode: string;
+  routeId: string;
+  heading: string;
+}
+
+const { localeCode, routeId, heading } = Astro.props;
+---
+
+<section>
+  <h1>{heading}</h1>
+  <p data-locale={localeCode} data-route={routeId}>
+    Content for this locale loads here (external source not connected yet).
+  </p>
+
+  <Picture
+    src="https://i.imgur.com/QkIa5tT.jpeg"
+    alt="Description of image"
+    width={500}
+    height={500}
+  />
+</section>

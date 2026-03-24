@@ -1,0 +1,26 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import LocaleHubLinks from "../../components/LocaleHubLinks.astro";
+import {
+  getLocaleHubStaticPaths,
+  getLocaleEntry,
+} from "../../i18n/config";
+
+export function getStaticPaths() {
+  return getLocaleHubStaticPaths();
+}
+
+const { locale } = Astro.params;
+const entry = locale ? getLocaleEntry(locale) : undefined;
+
+if (!entry) {
+  return new Response(null, { status: 404 });
+}
+---
+
+<Layout lang={entry.lang} title={entry.label}>
+  <main>
+    <h1>{entry.label}</h1>
+    <LocaleHubLinks localeCode={entry.code} />
+  </main>
+</Layout>
