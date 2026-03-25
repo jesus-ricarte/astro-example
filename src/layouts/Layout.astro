@@ -5,6 +5,14 @@ interface Props {
 }
 
 const { lang = "en", title = "Site" } = Astro.props;
+
+// Netlify CDN: s-maxage = edge TTL (seconds); SWR serves stale while revalidating.
+const CDN_S_MAXAGE_SEC = 300;
+const CDN_STALE_WHILE_REVALIDATE_SEC = 86_400;
+Astro.response.headers.set(
+  "Cache-Control",
+  `public, max-age=0, must-revalidate, s-maxage=${CDN_S_MAXAGE_SEC}, stale-while-revalidate=${CDN_STALE_WHILE_REVALIDATE_SEC}`,
+);
 ---
 
 <!doctype html>
