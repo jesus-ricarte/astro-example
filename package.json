@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@astrojs/netlify": "^6.6.4",
+    "@flotiq/flotiq-api-sdk": "^1.0.0-alpha.12",
     "astro": "^5.17.1"
   },
   "devDependencies": {

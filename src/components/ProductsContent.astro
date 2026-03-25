@@ -1,8 +1,7 @@
 ---
 import { Picture } from "astro:assets";
-/**
- * Replace with CMS/API fetch using `localeCode` and `routeId` when wiring external content.
- */
+import { getAllFlotiqProducts } from "../lib/flotiqProducts";
+
 interface Props {
   localeCode: string;
   routeId: string;
@@ -10,13 +9,62 @@ interface Props {
 }
 
 const { localeCode, routeId, heading } = Astro.props;
+
+let products: Awaited<ReturnType<typeof getAllFlotiqProducts>> = [];
+let fetchError: string | null = null;
+
+try {
+  products = await getAllFlotiqProducts();
+} catch (e) {
+  fetchError =
+    e instanceof Error ? e.message : "Failed to load products from Flotiq.";
+}
 ---
 
 <section>
   <h1>{heading}</h1>
-  <p data-locale={localeCode} data-route={routeId}>
-    Content for this locale loads here (external source not connected yet).
-  </p>
+
+  {
+    fetchError ? (
+      <p>{fetchError}</p>
+    ) : products.length === 0 ? (
+      <p>No products returned from Flotiq</p>
+    ) : (
+      <pre>{JSON.stringify(products, null, 2)}</pre>
+    )
+  }
+
+  {
+    products.map((product) => (
+      <div>
+        <h2>{product.name}</h2>
+        <p>
+          {new Intl.NumberFormat("es-AR", {
+            style: "currency",
+            currency: "USD",
+          }).format(product.price[0].USD)}
+        </p>
+        <p>
+          {new Intl.NumberFormat("es-AR", {
+            style: "currency",
+            currency: "ARS",
+          }).format(product.price[0].ARS)}
+        </p>
+        <p>
+          {new Intl.NumberFormat("es-ES", {
+            style: "currency",
+            currency: "EUR",
+          }).format(product.price[0].EUR)}
+        </p>
+        <p>
+          {new Intl.NumberFormat("ca-ES", {
+            style: "currency",
+            currency: "EUR",
+          }).format(product.price[0].EUR)}
+        </p>
+      </div>
+    ))
+  }
 
   <Picture
     src="https://i.imgur.com/QkIa5tT.jpeg"

@@ -1,11 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import ProductsContent from "../../components/ProductsContent.astro";
-import { getProductStaticPaths, resolvePageRoute } from "../../i18n/config";
-
-export function getStaticPaths() {
-  return getProductStaticPaths();
-}
+import { resolvePageRoute } from "../../i18n/config";
 
 const { locale, slug } = Astro.params;
 const resolved = locale && slug ? resolvePageRoute(locale, slug) : null;
