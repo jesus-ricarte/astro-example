@@ -35,6 +35,16 @@ export function getLocaleEntry(locale: string) {
   return LOCALES.find((l) => l.code === locale);
 }
 
+export function getLocaleHubStaticPaths() {
+  return LOCALES.map((loc) => ({ params: { locale: loc.code } }));
+}
+
+export function getProductStaticPaths() {
+  return LOCALES.map((loc) => ({
+    params: { locale: loc.code, slug: loc.routes.products.segment },
+  }));
+}
+
 export function resolvePageRoute(
   locale: string,
   slug: string,
