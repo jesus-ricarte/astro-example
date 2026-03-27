@@ -1,4 +1,5 @@
-export type LocaleCode = "en-US" | "es-ES" | "ca-ES";
+/** URL segment + Astro i18n locale id (lowercase, matches Netlify). */
+export type LocaleCode = "en-us" | "es-es" | "ca-es";
 
 export type SemanticRouteId = "products";
 
@@ -6,7 +7,7 @@ type LocaleRoutes = Record<SemanticRouteId, { segment: string; label: string }>;
 
 export const LOCALES = [
   {
-    code: "en-US" as const,
+    code: "en-us" as const,
     lang: "en",
     label: "United States (English)",
     routes: {
@@ -14,7 +15,7 @@ export const LOCALES = [
     } satisfies LocaleRoutes,
   },
   {
-    code: "es-ES" as const,
+    code: "es-es" as const,
     lang: "es",
     label: "España (Español)",
     routes: {
@@ -22,7 +23,7 @@ export const LOCALES = [
     } satisfies LocaleRoutes,
   },
   {
-    code: "ca-ES" as const,
+    code: "ca-es" as const,
     lang: "ca",
     label: "Espanya (Català)",
     routes: {
@@ -31,8 +32,8 @@ export const LOCALES = [
   },
 ] as const;
 
-export function getLocaleEntry(locale: string) {
-  return LOCALES.find((l) => l.code === locale);
+export function getLocaleEntry(localeSegment: string) {
+  return LOCALES.find((l) => l.code === localeSegment);
 }
 
 export function resolvePageRoute(
