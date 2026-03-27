@@ -1,6 +1,7 @@
 ---
 import { Picture } from "astro:assets";
 import { getAllFlotiqProducts } from "../lib/flotiqProducts";
+import { getIntlLocale } from "../i18n/config";
 
 interface Props {
   localeCode: string;
@@ -9,6 +10,7 @@ interface Props {
 }
 
 const { localeCode, routeId, heading } = Astro.props;
+const intlLocale = getIntlLocale(localeCode);
 
 if (Astro.url.searchParams.has("sort")) {
   Astro.response.headers.set("Cache-Control", "private, no-store");
@@ -44,25 +46,19 @@ try {
       <div>
         <h2>{product.name}</h2>
         <p>
-          {new Intl.NumberFormat("es-AR", {
+          {new Intl.NumberFormat(intlLocale, {
             style: "currency",
             currency: "USD",
           }).format(product.price[0].USD)}
         </p>
         <p>
-          {new Intl.NumberFormat("es-AR", {
+          {new Intl.NumberFormat(intlLocale, {
             style: "currency",
             currency: "ARS",
           }).format(product.price[0].ARS)}
         </p>
         <p>
-          {new Intl.NumberFormat("es-ES", {
-            style: "currency",
-            currency: "EUR",
-          }).format(product.price[0].EUR)}
-        </p>
-        <p>
-          {new Intl.NumberFormat("ca-ES", {
+          {new Intl.NumberFormat(intlLocale, {
             style: "currency",
             currency: "EUR",
           }).format(product.price[0].EUR)}
