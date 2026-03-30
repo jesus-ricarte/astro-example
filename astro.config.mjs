@@ -6,14 +6,14 @@ import netlify from "@astrojs/netlify";
 // https://astro.build/config
 export default defineConfig({
   output: "server",
-  site: "https://jesusricarte.netlify.app/",
+  site: "https://venerable-bavarois-9373ed.netlify.app/",
   adapter: netlify(),
   image: {
     domains: ["i.imgur.com"],
   },
   i18n: {
-    defaultLocale: "en-us",
-    locales: ["en-us", "es-es", "ca-es"],
+    defaultLocale: "en-US",
+    locales: ["en-US", "es-ES", "ca-ES"],
     routing: {
       prefixDefaultLocale: true,
       redirectToDefaultLocale: false,
