@@ -1,5 +1,5 @@
 /** URL segment + Astro i18n locale id (lowercase, matches Netlify). */
-export type LocaleCode = "en-us" | "es-es" | "es-ar" | "ca-es";
+export type LocaleCode = "en-us" | "es-es" | "ca-es";
 
 export type SemanticRouteId = "products";
 
@@ -9,7 +9,6 @@ export const LOCALES = [
   {
     code: "en-us" as const,
     lang: "en",
-    intlLocale: "en-US" as const,
     label: "United States (English)",
     routes: {
       products: { segment: "products", label: "Products" },
@@ -18,17 +17,7 @@ export const LOCALES = [
   {
     code: "es-es" as const,
     lang: "es",
-    intlLocale: "es-ES" as const,
     label: "España (Español)",
-    routes: {
-      products: { segment: "productos", label: "Productos" },
-    } satisfies LocaleRoutes,
-  },
-  {
-    code: "es-ar" as const,
-    lang: "es",
-    intlLocale: "es-AR" as const,
-    label: "Argentina (Español)",
     routes: {
       products: { segment: "productos", label: "Productos" },
     } satisfies LocaleRoutes,
@@ -36,7 +25,6 @@ export const LOCALES = [
   {
     code: "ca-es" as const,
     lang: "ca",
-    intlLocale: "ca-ES" as const,
     label: "Espanya (Català)",
     routes: {
       products: { segment: "productes", label: "Productes" },
@@ -46,12 +34,6 @@ export const LOCALES = [
 
 export function getLocaleEntry(localeSegment: string) {
   return LOCALES.find((l) => l.code === localeSegment);
-}
-
-/** BCP 47 tag for `Intl` (differs in case from URL locale id). */
-export function getIntlLocale(localeCode: string): string {
-  const entry = getLocaleEntry(localeCode);
-  return entry?.intlLocale ?? "en-US";
 }
 
 export function resolvePageRoute(
