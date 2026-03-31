@@ -6,7 +6,7 @@ import netlify from "@astrojs/netlify";
 // https://astro.build/config
 export default defineConfig({
   output: "server",
-  site: "https://venerable-bavarois-9373ed.netlify.app/",
+  site: "https://ricarte-shop.netlify.app/",
   adapter: netlify(),
   image: {
     domains: ["i.imgur.com"],
