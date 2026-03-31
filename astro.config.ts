@@ -5,6 +5,7 @@ import { ASTRO_DEFAULT_LOCALE, ASTRO_I18N_LOCALES } from "./src/i18n/config";
 
 // https://astro.build/config
 export default defineConfig({
+  trailingSlash: "never",
   env: {
     schema: {
       FLOTIQ_API_KEY: envField.string({
