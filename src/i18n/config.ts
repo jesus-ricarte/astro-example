@@ -1,4 +1,4 @@
-export type LocaleCode = "en-US" | "es-ES" | "ca-ES";
+export type LocaleCode = "en-US" | "es-ES" | "ca-ES" | "es-AR";
 
 export type SemanticRouteId = "products";
 
@@ -27,6 +27,14 @@ export const LOCALES = [
     label: "Espanya (Català)",
     routes: {
       products: { segment: "productes", label: "Productes" },
+    } satisfies LocaleRoutes,
+  },
+  {
+    code: "es-AR" as const,
+    lang: "es",
+    label: "Argentina (Español)",
+    routes: {
+      products: { segment: "productos", label: "Productos" },
     } satisfies LocaleRoutes,
   },
 ] as const;
