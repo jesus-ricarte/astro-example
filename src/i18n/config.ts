@@ -36,6 +36,12 @@ export function localePathSegment(code: LocaleCode): string {
   return code.toLowerCase();
 }
 
+/** URL path segment for the default locale (first entry in LOCALES). */
+export const ASTRO_DEFAULT_LOCALE = localePathSegment(LOCALES[0].code);
+
+/** URL path segments for Astro i18n; same order as LOCALES. */
+export const ASTRO_I18N_LOCALES = LOCALES.map((l) => localePathSegment(l.code));
+
 export function getLocaleEntry(locale: string) {
   const key = locale.toLowerCase();
   return LOCALES.find((l) => l.code.toLowerCase() === key);

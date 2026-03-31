@@ -1,7 +1,7 @@
-// @ts-check
+import netlify from "@astrojs/netlify";
 import { defineConfig } from "astro/config";
 
-import netlify from "@astrojs/netlify";
+import { ASTRO_DEFAULT_LOCALE, ASTRO_I18N_LOCALES } from "./src/i18n/config";
 
 // https://astro.build/config
 export default defineConfig({
@@ -12,8 +12,8 @@ export default defineConfig({
     domains: ["i.imgur.com"],
   },
   i18n: {
-    defaultLocale: "en-us",
-    locales: ["en-us", "es-es", "ca-es"],
+    defaultLocale: ASTRO_DEFAULT_LOCALE,
+    locales: [...ASTRO_I18N_LOCALES],
     routing: {
       prefixDefaultLocale: true,
       redirectToDefaultLocale: false,
