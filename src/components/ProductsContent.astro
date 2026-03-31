@@ -10,10 +10,6 @@ interface Props {
 
 const { localeCode, routeId, heading } = Astro.props;
 
-if (Astro.url.searchParams.has("sort")) {
-  Astro.response.headers.set("Cache-Control", "private, no-store");
-}
-
 let products: Awaited<ReturnType<typeof getAllFlotiqProducts>> = [];
 let fetchError: string | null = null;
 
