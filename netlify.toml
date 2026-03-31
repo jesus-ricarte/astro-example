@@ -1,7 +1,6 @@
-# Browser + shared caches (Cache-Control); Netlify CDN + durable (Netlify-CDN-Cache-Control).
-# TTLs: 31536000s = 365 days.
+# Netlify CDN + durable. Cache-Control for HTML is set in src/middleware.ts (SSR response).
+# TTLs: 31536000s = 365 days — keep in sync with DOCUMENT_CACHE_CONTROL in middleware.
 [[headers]]
   for = "/*"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, must-revalidate, s-maxage=31536000, stale-while-revalidate=31536000"
     Netlify-CDN-Cache-Control = "public, max-age=31536000, must-revalidate, s-maxage=31536000, stale-while-revalidate=31536000, durable"
