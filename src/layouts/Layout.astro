@@ -1,10 +1,17 @@
 ---
+import { canonicalPathname } from "../lib/canonicalUrl";
+
 interface Props {
   lang?: string;
   title?: string;
 }
 
 const { lang = "en", title = "Site" } = Astro.props;
+
+const canonicalHref =
+  Astro.site != null
+    ? new URL(canonicalPathname(Astro.url.pathname), Astro.site).href
+    : undefined;
 ---
 
 <!doctype html>
@@ -15,6 +22,7 @@ const { lang = "en", title = "Site" } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
+    {canonicalHref ? <link rel="canonical" href={canonicalHref} /> : null}
     <title>{title}</title>
   </head>
   <body>
