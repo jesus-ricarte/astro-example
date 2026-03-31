@@ -12,8 +12,8 @@ export default defineConfig({
     domains: ["i.imgur.com"],
   },
   i18n: {
-    defaultLocale: "en-US",
-    locales: ["en-US", "es-ES", "ca-ES"],
+    defaultLocale: "en-us",
+    locales: ["en-us", "es-es", "ca-es"],
     routing: {
       prefixDefaultLocale: true,
       redirectToDefaultLocale: false,

@@ -31,8 +31,14 @@ export const LOCALES = [
   },
 ] as const;
 
+/** Lowercase path prefix; Astro `i18n.locales` must use this shape. */
+export function localePathSegment(code: LocaleCode): string {
+  return code.toLowerCase();
+}
+
 export function getLocaleEntry(locale: string) {
-  return LOCALES.find((l) => l.code === locale);
+  const key = locale.toLowerCase();
+  return LOCALES.find((l) => l.code.toLowerCase() === key);
 }
 
 export function resolvePageRoute(
