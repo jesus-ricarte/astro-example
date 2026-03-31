@@ -1,4 +1,4 @@
-export type LocaleCode = "en-US" | "es-ES" | "ca-ES";
+export type LocaleCode = "en-US" | "es-ES" | "ca-ES" | "es-AR";
 
 export type SemanticRouteId = "products";
 
@@ -29,10 +29,30 @@ export const LOCALES = [
       products: { segment: "productes", label: "Productes" },
     } satisfies LocaleRoutes,
   },
+  {
+    code: "es-AR" as const,
+    lang: "es",
+    label: "Argentina (Español)",
+    routes: {
+      products: { segment: "productos", label: "Productos" },
+    } satisfies LocaleRoutes,
+  },
 ] as const;
 
+/** Lowercase path prefix; Astro `i18n.locales` must use this shape. */
+export function localePathSegment(code: LocaleCode): string {
+  return code.toLowerCase();
+}
+
+/** URL path segment for the default locale (first entry in LOCALES). */
+export const ASTRO_DEFAULT_LOCALE = localePathSegment(LOCALES[0].code);
+
+/** URL path segments for Astro i18n; same order as LOCALES. */
+export const ASTRO_I18N_LOCALES = LOCALES.map((l) => localePathSegment(l.code));
+
 export function getLocaleEntry(locale: string) {
-  return LOCALES.find((l) => l.code === locale);
+  const key = locale.toLowerCase();
+  return LOCALES.find((l) => l.code.toLowerCase() === key);
 }
 
 export function resolvePageRoute(

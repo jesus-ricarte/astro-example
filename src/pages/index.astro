@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { LOCALES } from "../i18n/config";
+import { LOCALES, localePathSegment } from "../i18n/config";
 ---
 
 <Layout>
@@ -9,7 +9,7 @@ import { LOCALES } from "../i18n/config";
       {
         LOCALES.map((loc) => (
           <li>
-            <a href={`/${loc.code}/`}>{loc.label}</a>
+            <a href={`/${localePathSegment(loc.code)}/`}>{loc.label}</a>
           </li>
         ))
       }
